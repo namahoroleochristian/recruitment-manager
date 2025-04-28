@@ -42,7 +42,7 @@ echo $isLoggedIn;
         ?>
                 
             <li>
-                <a href="job.php">Jobs</a>
+                <a href="../config/job.php">Jobs</a>
                 
             </li>
             <li>

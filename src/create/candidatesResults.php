@@ -1,13 +1,14 @@
 <?php
 session_start();
 include('../config/db.php');
+    
 
 if (is_null($_SESSION['userName'])) {
    header('location: ./auth/login.php?error=403 ');
    exit();
 }
 $isLoggedIn = !is_null($_SESSION['userName']);
-
+echo $isLoggedIn;
 
 ?>
 <!DOCTYPE html>
@@ -56,22 +57,43 @@ $isLoggedIn = !is_null($_SESSION['userName']);
         </nav>
     <form  method="post">
         <div>
-            <label for="postName">Post Name</label>
-            <input type="text" name="postName" placeholder="Post Name">
+            <label for="cid">candidate Id</label>
+            <input type="text" name="cid" placeholder="candidate Id">
         </div>
-        <button type="submit" name="submit">Add Post</button>
+       
+        <div>
+            <label for="doe">Date Of Exam</label>
+            <input type="date" name="doe" placeholder="Date of exam">
+        </div>
+        
+        
+            <label for="marks">marks</label>
+            <input type="text" name="marks" placeholder=" marks">
+        </div>
+        <div>
+            <label for="decision">decision</label>
+            <select name="decision">
+                <option value="pass">pass</option>
+                <option value="fail">fail</option>
+                <select>
+            
+        </div>
+        <button type="submit" name="submit">Add candidates result </button>
     </form>
-
     <?php
         if (isset($_POST['submit'])) {
-            $postName=trim($_POST['postName']);
-            if ( empty($postName)  ) {
-                header('location: job.php?error?emptyFields');
+            $cid=trim($_POST['cid']);
+            $decision=trim($_POST['decision']);
+            $doe=trim($_POST['doe']);
+            $marks=trim($_POST['marks']);
+            if ( empty($cid) || empty($decision) || empty($doe) || empty($marks)  ) {
+                header('location: candidatesResults.php?error?emptyFields');
+                exit();
             }
-            $sql = "INSERT INTO post VALUES(null,'$postName')";
+            $sql = "INSERT INTO candidatesResult VALUES(null,'$cid','$doe','$marks','$decision')";
             $result= mysqli_query($conn,$sql);
             if ($result) {
-                header('location: job.php');
+                header('location: ../view/candidatesResults.php');
                 exit();
             }
             else{
@@ -80,39 +102,6 @@ $isLoggedIn = !is_null($_SESSION['userName']);
 
         }
 
-
 ?>
-<section>
-    
-    <table border=1 cellspacing=0>
-    <thead>
-        <tr>
-            <th>Post Id</th>
-        <th>Post Name</th>
-        <th colspan=2>action</th>
-    </tr>
-
-</thead>
-<tbody>
-<?php
-    $sql = "SELECT * FROM post";
-    $result = mysqli_query($conn,$sql);
-    
-    while ($row = mysqli_fetch_assoc($result)) {
-       echo "
-       <tr>
-    <td>".$row['PostId']."</td>
-    <td>".$row['PostName']."</td>
-    <td><button><a href='../update/job.php?postId=".$row['PostId']."'>update</a></button></td>
-    <td><button><a href='../delete/job.php?postId=".$row['PostId']."'>delete</a></button></td>
-</tr>
-       ";
-    }
-    ?>
-</tbody>
-
-    </table>
-   
-</section>
 </body>
 </html>

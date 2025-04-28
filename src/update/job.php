@@ -1,13 +1,14 @@
 <?php
 session_start();
 include('../config/db.php');
+    
 
 if (is_null($_SESSION['userName'])) {
    header('location: ./auth/login.php?error=403 ');
    exit();
 }
 $isLoggedIn = !is_null($_SESSION['userName']);
-
+echo $isLoggedIn;
 
 ?>
 <!DOCTYPE html>
@@ -39,13 +40,13 @@ $isLoggedIn = !is_null($_SESSION['userName']);
             ";
         };
         ?>
-                
-            <li>
-                <a href="job.php">Jobs</a>
+        <li>
+                <a href="candidatesResults.php">Candidate Results</a>
                 
             </li>
+                
             <li>
-                <a href="../view/candidatesResults.php">Candidate Results</a>
+                <a href="../create/job.php">Jobs</a>
                 
             </li>
             <li>
@@ -54,24 +55,35 @@ $isLoggedIn = !is_null($_SESSION['userName']);
             </li>
         </ul>
         </nav>
+
+        <?php
+        if (isset($_GET['postId'])) {
+           $id = $_GET['postId'];
+           $SelectSql = "SELECT * FROM post where PostId='$id'";
+          
+           $result = mysqli_query($conn,$SelectSql);    
+            $row = mysqli_fetch_assoc($result);
+        }
+        ?>
     <form  method="post">
         <div>
-            <label for="postName">Post Name</label>
-            <input type="text" name="postName" placeholder="Post Name">
+            <label for="postName">Job Name</label>
+            <input type="text" name="postName" value=<?php echo $row['PostName']?>>
         </div>
-        <button type="submit" name="submit">Add Post</button>
+       
+        <button type="submit" name="submit">Update Candidate</button>
     </form>
-
     <?php
         if (isset($_POST['submit'])) {
-            $postName=trim($_POST['postName']);
-            if ( empty($postName)  ) {
-                header('location: job.php?error?emptyFields');
+            $postname=trim($_POST['postName']);
+            
+            if ( empty($postname)   ) {
+                header('location: candidate.php?error?emptyFields');
             }
-            $sql = "INSERT INTO post VALUES(null,'$postName')";
+            $sql = "UPDATE post SET PostName='$postname' WHERE PostId=$id";
             $result= mysqli_query($conn,$sql);
             if ($result) {
-                header('location: job.php');
+                header('location: ../create/job.php');
                 exit();
             }
             else{
@@ -80,39 +92,6 @@ $isLoggedIn = !is_null($_SESSION['userName']);
 
         }
 
-
 ?>
-<section>
-    
-    <table border=1 cellspacing=0>
-    <thead>
-        <tr>
-            <th>Post Id</th>
-        <th>Post Name</th>
-        <th colspan=2>action</th>
-    </tr>
-
-</thead>
-<tbody>
-<?php
-    $sql = "SELECT * FROM post";
-    $result = mysqli_query($conn,$sql);
-    
-    while ($row = mysqli_fetch_assoc($result)) {
-       echo "
-       <tr>
-    <td>".$row['PostId']."</td>
-    <td>".$row['PostName']."</td>
-    <td><button><a href='../update/job.php?postId=".$row['PostId']."'>update</a></button></td>
-    <td><button><a href='../delete/job.php?postId=".$row['PostId']."'>delete</a></button></td>
-</tr>
-       ";
-    }
-    ?>
-</tbody>
-
-    </table>
-   
-</section>
 </body>
 </html>
