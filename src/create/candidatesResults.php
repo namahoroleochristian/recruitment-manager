@@ -16,16 +16,18 @@ echo $isLoggedIn;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="../style/style.css">
+
+    <title>Results</title>
 </head>
 <body>
 <nav>
-    <ul>
+    <ul  class="title">
             <li>
                 <a href="../index.php">Beauty</a>
             </li>
         </ul>
-    <ul>
+    <ul class="NavItems">
         <?php
         if( !$isLoggedIn){
             echo "
@@ -55,40 +57,46 @@ echo $isLoggedIn;
             </li>
         </ul>
         </nav>
-    <form  method="post">
+    <form  method="post" id="create">
         <div>
-            <label for="cid">candidate Id</label>
+            <label for="cid">candidate Id</label><br>
             <input type="text" name="cid" placeholder="candidate Id">
         </div>
        
         <div>
-            <label for="doe">Date Of Exam</label>
+            <label for="doe">Date Of Exam</label><br>
             <input type="date" name="doe" placeholder="Date of exam">
         </div>
         
         
-            <label for="marks">marks</label>
+            <label for="marks">marks</label><br>
             <input type="text" name="marks" placeholder=" marks">
         </div>
         <div>
-            <label for="decision">decision</label>
+            <!-- <label for="decision">decision</label><br>
             <select name="decision">
                 <option value="pass">pass</option>
                 <option value="fail">fail</option>
                 <select>
             
-        </div>
+        </div> -->
         <button type="submit" name="submit">Add candidates result </button>
     </form>
     <?php
         if (isset($_POST['submit'])) {
             $cid=trim($_POST['cid']);
-            $decision=trim($_POST['decision']);
+            // $decision=trim($_POST['decision']);
             $doe=trim($_POST['doe']);
             $marks=trim($_POST['marks']);
-            if ( empty($cid) || empty($decision) || empty($doe) || empty($marks)  ) {
+            if ( empty($cid) || empty($doe) || empty($marks)  ) {
                 header('location: candidatesResults.php?error?emptyFields');
                 exit();
+            }
+            if ($marks >= 50) {
+                $decision = "pass";
+            }
+            else{
+                $decision = "fail";
             }
             $sql = "INSERT INTO candidatesResult VALUES(null,'$cid','$doe','$marks','$decision')";
             $result= mysqli_query($conn,$sql);

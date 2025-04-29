@@ -16,16 +16,18 @@ echo $isLoggedIn;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="../style/style.css">
+
+    <title>candidate || update</title>
 </head>
 <body>
 <nav>
-    <ul>
+    <ul class="title">
             <li>
                 <a href="../index.php">Beauty</a>
             </li>
         </ul>
-    <ul>
+    <ul class= "NavItems">
         <?php
         if( !$isLoggedIn){
             echo "

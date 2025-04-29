@@ -39,7 +39,7 @@ include('../config/db.php');
                 $FindUsersql = "SELECT * FROM users WHERE UserName='$name'";
                 $FoundUser = mysqli_query($conn,$FindUsersql);
                 
-                $User = mysqli_fetch_assoc($FoundUser);
+                $User = mysqli_fetch_assoc($FoundUser); 
                 
                 if (!$User['UserName']) {
                     header("location: login.php?error=invalidCredentials");

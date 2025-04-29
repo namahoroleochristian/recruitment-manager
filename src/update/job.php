@@ -20,12 +20,12 @@ echo $isLoggedIn;
 </head>
 <body>
 <nav>
-    <ul>
+    <ul class="title">
             <li>
                 <a href="../index.php">Beauty</a>
             </li>
         </ul>
-    <ul>
+    <ul class="NavItems">
         <?php
         if( !$isLoggedIn){
             echo "

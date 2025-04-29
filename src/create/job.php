@@ -15,16 +15,18 @@ $isLoggedIn = !is_null($_SESSION['userName']);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/style.css">
+
     <title>Document</title>
 </head>
 <body>
 <nav>
-    <ul>
+    <ul class="title">
             <li>
                 <a href="../index.php">Beauty</a>
             </li>
         </ul>
-    <ul>
+    <ul class="NavItems">
         <?php
         if( !$isLoggedIn){
             echo "
@@ -54,12 +56,12 @@ $isLoggedIn = !is_null($_SESSION['userName']);
             </li>
         </ul>
         </nav>
-    <form  method="post">
-        <div>
+    <form  method="post" class="postForm">
+        <div class="group">
             <label for="postName">Post Name</label>
-            <input type="text" name="postName" placeholder="Post Name">
+            <input class="postName" type="text" name="postName" placeholder="Post Name">
         </div>
-        <button type="submit" name="submit">Add Post</button>
+        <button type="submit" name="submit" class="add">Add Post</button>
     </form>
 
     <?php
@@ -84,7 +86,7 @@ $isLoggedIn = !is_null($_SESSION['userName']);
 ?>
 <section>
     
-    <table border=1 cellspacing=0>
+    <table id="tablepost" border=1 cellspacing=0>
     <thead>
         <tr>
             <th>Post Id</th>

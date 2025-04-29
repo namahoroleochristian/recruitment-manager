@@ -8,7 +8,7 @@ if (is_null($_SESSION['userName'])) {
    exit();
 }
 $isLoggedIn = !is_null($_SESSION['userName']);
-echo $isLoggedIn;
+// echo $isLoggedIn;
 
 ?>
 <!DOCTYPE html>
@@ -16,16 +16,18 @@ echo $isLoggedIn;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/style.css">
+
     <title>Document</title>
 </head>
 <body>
 <nav>
-    <ul>
+    <ul class="title">
             <li>
                 <a href="../index.php">Beauty</a>
             </li>
         </ul>
-    <ul>
+    <ul class="NavItems">
         <?php
         if( !$isLoggedIn){
             echo "
@@ -56,14 +58,14 @@ echo $isLoggedIn;
         </ul>
         </nav>
         <section>
-            <Button> <a href="../create/candidatesResults.php">Add results</a></Button>
-            <table border=1 cellspacing=0>
+            <Button class="add"> <a class="add" href="../create/candidatesResults.php">Add results</a></Button>
+            <table cellspacing=0 id="table">
                 <thead>
                     <tr>
-                        <th>Candidate id</th>
-                        <th>Candidate Result Id</th>
+                        <th>Candidate Name</th>
+                        <th>Post Name</th>
                         
-                        <th>date of birth</th>
+                        <th>Date of exam </th>
                         <th>marks</th>
                         <th>decision</th>
                         <th colspan=2>action</th>
@@ -72,21 +74,19 @@ echo $isLoggedIn;
                 </thead>
                 <tbody>
                     <?php
-                        $sql = "SELECT * FROM candidatesresult";
+                        $sql = "SELECT candidates.CFirstName, candidates.CLastName,post.PostName,candidatesresult.CRId,candidatesresult.examDate,candidatesresult.CRMarks, candidatesresult.CRDecision FROM candidates JOIN candidatesresult ON candidates.CId = candidatesresult.CId JOIN post ON post.postId = candidates.PostId;";
                         $result = mysqli_query($conn,$sql);
                         
                         while($row = mysqli_fetch_assoc($result)){
                             echo "
                                 <tr>
-                        <td>".$row['CId']."</td>
-                        
-                 
-                        <td>".$row['CRId']."</td>
+                        <td>".$row['CFirstName']." ".$row['CLastName']."</td>
+                        <td>".$row['PostName']."</td>
                         <td>".$row['examDate']."</td>
                         <td>".$row['CRMarks']."</td>
                         <td>".$row['CRDecision']."</td>
-                        <td><button><a href='../update/candidatesResults.php?candidateResultId=".$row['CRId']."'>update</a></button></td>
-                        <td><button><a href='../delete/candidatesResults.php?candidateResultId=".$row['CRId']."'>delete</a></button></td>
+                        <td><button class='update'><a href='../update/candidatesResults.php?candidateResultId=".$row['CRId']."'>update</a></button></td>
+                        <td><button class='delete'><a href='../delete/candidatesResults.php?candidateResultId=".$row['CRId']."'>delete</a></button></td>
                     </tr>
                             ";
 

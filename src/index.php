@@ -6,7 +6,6 @@ if (is_null($_SESSION['userName'])) {
    exit();
 }
 $isLoggedIn = !is_null($_SESSION['userName']);
-echo $isLoggedIn;
 
 ?>
 <!DOCTYPE html>
@@ -18,15 +17,14 @@ echo $isLoggedIn;
     <title>Beauty</title>
 </head>
 <body>
-    <nav>
-    <ul>
+    <nav >
+        <ul class="title">
             <li>
                 Beauty
             </li>
-        </ul>
-        </nav>
-    <nav>
-    <ul>
+    </ul>
+       
+    <ul class="NavItems">
         <?php
         if( !$isLoggedIn){
             echo "
@@ -57,8 +55,8 @@ echo $isLoggedIn;
         </ul>
         </nav>
         <section>
-            <Button> <a href="./create/candidate.php">Add candidate</a></Button>
-            <table border=1 cellspacing=0>
+            <Button class="add" > <a   href="./create/candidate.php">Add candidate</a></Button>
+            <table border=1 cellspacing=2 id="table">
                 <thead>
                     <tr>
                         <th>id</th>
@@ -88,8 +86,8 @@ echo $isLoggedIn;
                         <td>".$row['CDateOfBirth']."</td>
                         <td>".$row['PhoneNumber']."</td>
                         <td>".$row['PostId']."</td>
-                        <td><button><a href='./update/candidate.php?candidateId=".$row['CId']."'>update</a></button></td>
-                        <td><button><a href='./delete/candidate.php?candidateId=".$row['CId']."'>delete</a></button></td>
+                        <td><button><a class='updatelink' href='./update/candidate.php?candidateId=".$row['CId']."'>update</a></button></td>
+                        <td><button><a class='updatelink' href='./delete/candidate.php?candidateId=".$row['CId']."'>delete</a></button></td>
                     </tr>
                             ";
 

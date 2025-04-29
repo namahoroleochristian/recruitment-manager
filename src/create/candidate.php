@@ -16,16 +16,17 @@ echo $isLoggedIn;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/style.css">
     <title>Document</title>
 </head>
 <body>
 <nav>
-    <ul>
+    <ul class="title">
             <li>
                 <a href="../index.php">Beauty</a>
             </li>
         </ul>
-    <ul>
+    <ul class="NavItems">
         <?php
         if( !$isLoggedIn){
             echo "
@@ -51,7 +52,7 @@ echo $isLoggedIn;
             </li>
         </ul>
         </nav>
-    <form  method="post">
+    <form  method="post" id="create">
         <div>
             <label for="fname">First Name</label>
             <input type="text" name="fname" placeholder="First Name">
