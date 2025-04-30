@@ -22,6 +22,17 @@ include('../config/db.php');
             <input type="password" name="password" placeholder="passwords ">
         </div>
         <button type="submit" id="loginbutton" name="submit">login</button>
+        <?php
+        if (isset($_GET['error'])) {
+            $error = $_GET['error'];
+            if ($error = 403) {
+                echo"
+                <p class='error'>please login first</p>
+                ";
+            }
+        }
+
+        ?>
         <p>Don't have an account ? <a href="signup.php">signup</a></p>
     </form>
     <?php

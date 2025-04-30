@@ -16,6 +16,7 @@ echo $isLoggedIn;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/style.css">
     <title>Document</title>
 </head>
 <body>
@@ -64,7 +65,7 @@ echo $isLoggedIn;
             $row = mysqli_fetch_assoc($result);
         }
         ?>
-     <form  method="post">
+     <form  method="post" id="create">
         <div>
             <label for="cid">candidate Id</label>
             <input type="text" name="cid" value=<?php echo $row['CId'] ?>>
@@ -87,7 +88,7 @@ echo $isLoggedIn;
                 <select>
             
         </div>
-        <button type="submit" name="submit">Add candidates result </button>
+        <button type="submit" name="submit">update candidates result </button>
     </form>
     
          <?php
