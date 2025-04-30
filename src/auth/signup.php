@@ -9,19 +9,21 @@ include('../config/db.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/style.css">
+
     <title>Sign Up</title>
 </head>
 <body>
-<form method="post">
+<form method="post" id="create">
         <div>
-            <label for="name">Name</label>
+            <label for="name">Name</label><br>
             <input type="text" name="name" placeholder="Names ">
         </div>
         <div>
-            <label for="password">password</label>
+            <label for="password">password</label><br>
             <input type="password" name="password" placeholder="passwords ">
         </div>
-        <button type="submit" name="submit" >Signup</button>
+        <button type="submit" name="submit" id="loginbutton">Signup</button>
         <p>already have an account ? <a href="login.php">Login</a></p>
     </form>
     <?php

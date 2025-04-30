@@ -8,19 +8,20 @@ include('../config/db.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/style.css">
     <title> Login</title>
 </head>
 <body>
-    <form method="post">
+    <form method="post" id="create">
         <div>
-            <label for="name">Name</label>
+            <label for="name">Name</label><br>
             <input type="text" name="name" placeholder="Names ">
         </div>
         <div>
-            <label for="password">password</label>
+            <label for="password">password</label><br>
             <input type="password" name="password" placeholder="passwords ">
         </div>
-        <button type="submit" name="submit">login</button>
+        <button type="submit" id="loginbutton" name="submit">login</button>
         <p>Don't have an account ? <a href="signup.php">signup</a></p>
     </form>
     <?php

@@ -105,8 +105,8 @@ $isLoggedIn = !is_null($_SESSION['userName']);
        <tr>
     <td>".$row['PostId']."</td>
     <td>".$row['PostName']."</td>
-    <td><button><a href='../update/job.php?postId=".$row['PostId']."'>update</a></button></td>
-    <td><button><a href='../delete/job.php?postId=".$row['PostId']."'>delete</a></button></td>
+    <td><button class='update'><a class='updatelink' href='../update/job.php?postId=".$row['PostId']."'>update</a></button></td>
+    <td><button class='delete'><a class='deletelink' href='../delete/job.php?postId=".$row['PostId']."'>delete</a></button></td>
 </tr>
        ";
     }
